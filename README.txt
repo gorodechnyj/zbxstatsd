@@ -13,16 +13,20 @@ zbx-statsd is a clone of Etsy's statsd and Steve Ivy's py-statsd designed to wor
 
 Usage
 -------------
+To start daemon, put zabbixstatsd file in /etc/init.d/   
 
 Client:
-    from zbx-statsd import Client, Server
+    from zbxstatsd import Client
 
-    sc = Client('example.org',8125, 'zabbix_name_of_this_machine')
+    sc = Client('zabbix-host', 8126, 'zabbix_name_of_this_machine')
 
     sc.timing('python_test.time',500)
     sc.increment('python_test.inc_int')
     sc.decrement('python_test.decr_int')
 
 Server:
+	from zbxstatsd import Server
     srvr = Server(debug=True)
     srvr.serve()
+
+   
