@@ -1,3 +1,4 @@
+#!/usr/local/bin/python
 import re
 from socket import AF_INET, SOCK_DGRAM, socket
 import threading
@@ -159,7 +160,7 @@ class Server(object):
 class ServerDaemon(Daemon):
     def run(self, options):
         if setproctitle:
-            setproctitle('zbxstatsd')
+            setproctitle('zabbixstatsd')
         server = Server(pct_threshold=options.pct, debug=options.debug, flush_interval=options.flush_interval)
         server.serve(options.name, options.port, options.zabbix_host,
                      options.zabbix_port)

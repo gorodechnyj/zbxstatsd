@@ -16,14 +16,12 @@ set -e
 case "$1" in
   start)
 	echo -n "Starting $DESC: "
-	start-stop-daemon --start --quiet --pidfile /var/run/$NAME.pid \
-		--exec $DAEMON
+	$DAEMON -D
 	echo "$NAME."
 	;;
   stop)
 	echo -n "Stopping $DESC: "
-	start-stop-daemon --stop --quiet --pidfile /var/run/$NAME.pid
-	# \	--exec $DAEMON
+	$DAEMON --stop
 	echo "$NAME."
 	;;
   #reload)
@@ -45,12 +43,9 @@ case "$1" in
 	#	just the same as "restart".
 	#
 	echo -n "Restarting $DESC: "
-	start-stop-daemon --stop --quiet --pidfile \
-		/var/run/$NAME.pid
-		# --exec $DAEMON
+	$DAEMON --stop
 	sleep 1
-	start-stop-daemon --start --quiet --pidfile \
-		/var/run/$NAME.pid --exec $DAEMON
+	$DAEMON -D
 	echo "$NAME."
 	;;
   *)
